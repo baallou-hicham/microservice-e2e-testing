@@ -4,10 +4,12 @@ import net.baallou.customerservice.dto.CustomerDTO;
 import net.baallou.customerservice.entities.Customer;
 import net.baallou.customerservice.exceptions.CustomerAlreadyExistsException;
 import net.baallou.customerservice.exceptions.CustomerNotFoundException;
+import net.baallou.customerservice.exceptions.EmailAlreadyExistException;
 import net.baallou.customerservice.mapper.CustomerMapper;
 import net.baallou.customerservice.repositories.CustomerRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -30,26 +32,30 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO getCustomerById(Long id) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id " + id));
+        Optional<Customer> customer = customerRepository.findById(id);
+        if(customer.isEmpty()) throw new CustomerNotFoundException("Customer not found with id " + id);
 
-        return customerMapper.fromCustomer(customer);
+        return customerMapper.fromCustomer(customer.get());
     }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        return customerRepository.findAll()
-                .stream()
-                .map(customerMapper::fromCustomer)
-                .collect(Collectors.toList());
+        List<Customer> allCustomers = customerRepository.findAll();
+        return customerMapper.fromListCustomers(allCustomers);
+//        return customerRepository.findAll()
+//                .stream()
+//                .map(customerMapper::fromCustomer)
+//                .collect(Collectors.toList());
     }
 
     @Override
     public List<CustomerDTO> searchCustomers(String keyword) {
-        return customerRepository.findByFirstNameContainsIgnoreCase(keyword)
-                .stream()
-                .map(customerMapper::fromCustomer)
-                .collect(Collectors.toList());
+        List<Customer> customers = customerRepository.findByFirstNameContainsIgnoreCase(keyword);
+        return customerMapper.fromListCustomers(customers);
+//        return customerRepository.findByFirstNameContainsIgnoreCase(keyword)
+//                .stream()
+//                .map(customerMapper::fromCustomer)
+//                .collect(Collectors.toList());
     }
 
     @Override

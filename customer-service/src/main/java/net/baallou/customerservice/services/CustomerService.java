@@ -1,6 +1,7 @@
 package net.baallou.customerservice.services;
 
 import net.baallou.customerservice.dto.CustomerDTO;
+import net.baallou.customerservice.exceptions.EmailAlreadyExistException;
 
 import java.util.List;
 

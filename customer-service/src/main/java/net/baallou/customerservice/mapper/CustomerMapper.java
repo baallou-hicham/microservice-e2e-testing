@@ -23,4 +23,8 @@ public class CustomerMapper {
     public List<CustomerDTO> fromListCustomers(List<Customer> customers) {
         return customers.stream().map(c->modelMapper.map(c, CustomerDTO.class)).collect(Collectors.toList());
     }
+
+    public Customer toCustomer(CustomerDTO dto) {
+        return modelMapper.map(dto, Customer.class);
+    }
 }
