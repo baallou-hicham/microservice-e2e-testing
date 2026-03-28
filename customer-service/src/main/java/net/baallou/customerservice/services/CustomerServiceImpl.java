@@ -1,5 +1,6 @@
 package net.baallou.customerservice.services;
 
+import lombok.RequiredArgsConstructor;
 import net.baallou.customerservice.dto.CustomerDTO;
 import net.baallou.customerservice.entities.Customer;
 import net.baallou.customerservice.exceptions.CustomerAlreadyExistsException;
@@ -7,14 +8,17 @@ import net.baallou.customerservice.exceptions.CustomerNotFoundException;
 import net.baallou.customerservice.exceptions.EmailAlreadyExistException;
 import net.baallou.customerservice.mapper.CustomerMapper;
 import net.baallou.customerservice.repositories.CustomerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
-    private CustomerRepository customerRepository;
-    private CustomerMapper customerMapper;
+    private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
     @Override
     public CustomerDTO addCustomer(CustomerDTO customerDTO) {
