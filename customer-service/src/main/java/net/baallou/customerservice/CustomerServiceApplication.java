@@ -15,4 +15,16 @@ public class CustomerServiceApplication {
         SpringApplication.run(CustomerServiceApplication.class, args);
     }
 
+//    @Bean
+//    @Profile("!test")
+//    CommandLineRunner commandLineRunner(CustomerRepository customerRepository) {
+//        return args -> {
+//            customerRepository.save(Customer.builder().firstName("Hicham")
+//                    .lastName("Baallou").email("hicham@gmail.com").build());
+//            customerRepository.save(Customer.builder().firstName("Mohamed")
+//                    .lastName("Hamdaoui").email("mohamed@gmail.com").build());
+//            customerRepository.save(Customer.builder().firstName("Rida")
+//                    .lastName("Tahiri").email("rida@gmail.com").build());
+//        };
+//    }
 }
