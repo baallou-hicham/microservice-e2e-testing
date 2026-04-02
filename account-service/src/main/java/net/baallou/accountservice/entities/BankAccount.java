@@ -1,13 +1,12 @@
 package net.baallou.accountservice.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import net.baallou.accountservice.dto.CustomerDTO;
 import net.baallou.accountservice.entities.enums.AccountStatus;
 import net.baallou.accountservice.entities.enums.AccountType;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,6 +20,8 @@ public class BankAccount {
     @Id
     private String id;
 
+    private double balance;
+
     private Date createdAt;
 
     @Enumerated(EnumType.STRING)
@@ -29,7 +30,7 @@ public class BankAccount {
     @Enumerated(EnumType.STRING)
     private AccountStatus status; // CREATED, ACTIVATED, SUSPENDED, BLOCKED
 
-    private double balance;
-
+    @Transient
+    private CustomerDTO customer;
     private Long customerId; // référence Customer-Service
 }

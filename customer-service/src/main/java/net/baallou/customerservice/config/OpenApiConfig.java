@@ -19,7 +19,7 @@ public class OpenApiConfig {
                         .version("1.0")
                         .description("Microservice de gestion des clients"))
                 .servers(List.of(
-                        new Server().url("http://localhost:8084")
+                        new Server().url("http://localhost:8081")
                 ));
     }
 }
