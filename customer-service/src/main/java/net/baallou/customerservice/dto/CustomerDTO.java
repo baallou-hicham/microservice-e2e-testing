@@ -2,11 +2,10 @@ package net.baallou.customerservice.dto;
 
 import lombok.*;
 
-@NoArgsConstructor @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerDTO {
     private Long id;
     private String firstName;
